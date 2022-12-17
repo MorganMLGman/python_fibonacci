@@ -21,14 +21,17 @@ def fibonacci(n: int, cache: dict = {}) -> int:
             cache[n] = result
             return result
     else:
-        a = fibonacci(limit - 1, cache)
-        b = fibonacci(limit, cache)
-        
-        iters = n - limit + 1
-        
-        for _ in range(iters):
-            a, b = b, a + b
-        return a
+        try:
+            return cache[n]
+        except KeyError:            
+            a = fibonacci(limit - 1, cache)
+            b = fibonacci(limit, cache)
+                        
+            for i in range(limit, n+1):
+                a, b = b, a + b
+                if(i < 10000):
+                    cache[i] = a
+            return a
         
         
     
