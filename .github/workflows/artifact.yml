@@ -1,0 +1,48 @@
+name: Build and push Docker image
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    name: Build and upload python artifact
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        tags: |
+          type=semver,pattern={{version}}
+    
+    - name: Package Application Windows
+      uses: JackMcKew/pyinstaller-action-windows@main
+      with:
+        path: .
+
+    
+    - name: Package Application Linux
+      uses: JackMcKew/pyinstaller-action-linux@main
+      with:
+        path: .
+
+    - name: Upload Windows artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-fibonacci-windows-${{ steps.meta.outputs.tags }}
+        path: dist/windows
+
+    - name: Upload Linux artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-fibonacci-linux-${{ steps.meta.outputs.tags }}
+        path: dist/linux
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "dist/linux/*,dist/windows/*"
