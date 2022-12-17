@@ -57,6 +57,6 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: |
-          ${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci:cache
+          type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci:cache
         cache-to: |
-          ${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci:cache
+          type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci:cache
