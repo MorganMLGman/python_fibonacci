@@ -56,7 +56,7 @@ def main():
         exit(1)
     
     print(f"Value of {N} element {result= }")
-    print(f"Calculation time: {(perf_counter() - start_t):.3f} s")
+    print(f"Calculation time: {(perf_counter() - start_t):.4f} s")
     
     with open('cache.json', 'w') as f:
         dump(cache, f)
