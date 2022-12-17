@@ -19,7 +19,7 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         images: |
-          ${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci
+          # ${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci
           ghcr.io/${{ github.repository_owner }}/python-fibonacci
         tags: |
           type=ref,event=branch
@@ -56,3 +56,7 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        cache-from: |
+          ${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci:cache
+        cache-to: |
+          ${{ secrets.DOCKER_HUB_USERNAME }}/python-fibonacci:cache
