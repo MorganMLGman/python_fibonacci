@@ -1,4 +1,4 @@
-name: Build and push Docker image
+name: Build and upload python artifact
 
 on:
   workflow_dispatch:
