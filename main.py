@@ -34,7 +34,6 @@ def fibonacci(n: int, cache: dict = {}) -> int:
             return a
 
 def main():
-    print(getrecursionlimit())
     print(f"{name=}\n{author=}\n{group=}\n")
     N = int(input("Please input element number you want to calculate: "))
     if(N < 0):
