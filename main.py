@@ -32,14 +32,14 @@ def fibonacci(n: int, cache: dict = {}) -> int:
                 if(i < 10000):
                     cache[i] = a
             return a
-        
-        
-    
 
 def main():
     print(getrecursionlimit())
     print(f"{name=}\n{author=}\n{group=}\n")
     N = int(input("Please input element number you want to calculate: "))
+    if(N < 0):
+        print("Element number must be greater or equal 0")
+        exit(1)
     
     
     if exists('cache.json'):
@@ -54,14 +54,13 @@ def main():
         result = fibonacci(N, cache)
     except RecursionError:
         print("Calculation crashed, probably input value is too large")
-        exit(-1)
+        exit(1)
     
     print(f"Value of {N} element {result= }")
     print(f"Calculation time: {(perf_counter() - start_t):.3f} s")
     
     with open('cache.json', 'w') as f:
         dump(cache, f)
-    
 
 if __name__ == "__main__":
     main()
