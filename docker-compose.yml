@@ -1,13 +1,16 @@
 version: "3.9"
-services:
-  fibonacci:
-    image: ghcr.io/morganmlgman/python-fibonacci
-    container_name: python-fibonacci
-    restart: unless-stopped
+networks:
+  redis-internal:
+    name: redis-internal
+    driver: bridge
 
+services:
   redis:
     image: redis:alpine
     container_name: redis-python
+    networks:
+      - redis-internal
+    hostname: redis-python
 
     restart: unless-stopped
 

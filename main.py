@@ -70,13 +70,10 @@ def main():
     print(f"{name=}\n{author=}\n{group=}\n")
     
     r_available = False
-    r = redis.Redis(host='localhost', port=6379)
+    r = redis.Redis(host='redis-python', port=6379)
     
-    try:
-        if r.ping():
+    if r.ping():
             r_available = True
-    except Exception:
-        pass
         
     if not r_available:
         print("Redis is not available, fallback to local cache")
