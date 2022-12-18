@@ -35,11 +35,6 @@ def fibonacci(n: int, cache: dict = {}) -> int:
 
 def main():
     print(f"{name=}\n{author=}\n{group=}\n")
-    N = int(input("Please input element number you want to calculate: "))
-    if(N < 0):
-        print("Element number must be greater or equal 0")
-        exit(1)
-    
     
     if exists('cache.json'):
         with open('cache.json', 'r') as f:
@@ -47,16 +42,27 @@ def main():
     else:
         cache = {}
         
-    start_t = perf_counter()
-    
-    try:
-        result = fibonacci(N, cache)
-    except RecursionError:
-        print("Calculation crashed, probably input value is too large")
-        exit(1)
-    
-    print(f"Value of {N} element {result= }")
-    print(f"Calculation time: {(perf_counter() - start_t):.3f} s")
+    while True:
+        N = int(input("Please input element number you want to calculate, enter -1 to exit: "))
+        
+        if(N >= 0):
+            start_t = perf_counter()
+        
+            try:
+                result = fibonacci(N, cache)
+            except RecursionError:
+                print("Calculation crashed, probably input value is too large")
+                continue
+            
+            end_t = perf_counter()
+            
+            print(f"Value of {N} element {result= }")
+            print(f"Calculation time: {(end_t - start_t):.6f} s")
+        
+        elif N == -1:
+            break
+        else:
+            continue
     
     with open('cache.json', 'w') as f:
         dump(cache, f)
