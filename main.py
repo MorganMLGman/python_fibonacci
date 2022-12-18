@@ -72,8 +72,11 @@ def main():
     r_available = False
     r = redis.Redis(host='redis-python', port=6379)
     
-    if r.ping():
+    try:
+        if r.ping():
             r_available = True
+    except Exception:
+        pass
         
     if not r_available:
         print("Redis is not available, fallback to local cache")
