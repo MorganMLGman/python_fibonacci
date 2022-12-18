@@ -42,8 +42,10 @@ jobs:
         password: ${{ secrets.GHCR_TOKEN }}
 
     - name: Login to personal registry
-      run: |
-        echo ${{ secrets.MORGANMLG_PASSWORD }} | docker login -u ${{ secrets.MORGANMLG_USERNAME }} --password-stdin registry.morganmlg.com
+      with:
+        registry: registry.morganmlg.com
+        username: ${{ secrets.MORGANMLG_USERNAME }}
+        password: ${{ secrets.MORGANMLG_PASSWORD }}
 
     - name: Build Docker image
       uses: docker/build-push-action@v3
