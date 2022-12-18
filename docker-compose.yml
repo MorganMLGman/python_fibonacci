@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  fibonacci:
+    image: ghcr.io/morganmlgman/python-fibonacci
+    container_name: python-fibonacci
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: redis-python
+
+    restart: unless-stopped
+
+    ports:
+      - 6379:6379
