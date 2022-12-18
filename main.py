@@ -1,5 +1,5 @@
 from time import perf_counter
-from json import dump, load
+from pickle import load, dump
 from os.path import exists
 from sys import getrecursionlimit
 
@@ -29,15 +29,15 @@ def fibonacci(n: int, cache: dict = {}) -> int:
                         
             for i in range(limit, n+1):
                 a, b = b, a + b
-                if(i < 10000):
+                if(i <= 100000):
                     cache[i] = a
             return a
 
 def main():
     print(f"{name=}\n{author=}\n{group=}\n")
     
-    if exists('cache.json'):
-        with open('cache.json', 'r') as f:
+    if exists('cache.pkl'):
+        with open('cache.pkl', 'rb') as f:
             cache = load(f)
     else:
         cache = {}
@@ -64,7 +64,7 @@ def main():
         else:
             continue
     
-    with open('cache.json', 'w') as f:
+    with open('cache.pkl', 'wb') as f:
         dump(cache, f)
 
 if __name__ == "__main__":

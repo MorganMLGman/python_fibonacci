@@ -130,3 +130,4 @@ dmypy.json
 
 # Cache
 cache.json
+cache.pkl
